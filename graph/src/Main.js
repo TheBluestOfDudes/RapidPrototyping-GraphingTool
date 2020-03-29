@@ -1,10 +1,10 @@
 import React, { Component } from "react";
+import GraphInterface from "./GraptoolInterface";
 
 class Main extends Component {
     render() {
         return (
-                <div>
-                </div>
+            <GraphInterface type="linegraph" width="400" height="400" ></GraphInterface>       
               );
     }
 }
