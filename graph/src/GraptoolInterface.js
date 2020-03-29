@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Bargraph from "./Bargraph";
-import Histogram from "./Histogram";
 import Linegraph from "./Linegraph";
 import Piechart from "./Piechart";
 
@@ -21,7 +20,6 @@ class GraptoolInterface extends Component {
         super(props);
         // types of diagrams are:
         // - bargraph
-        // - histogram
         // - linegraph
         // - piechart
     }
@@ -36,10 +34,6 @@ function Choosemodel(props) {
     switch(props.type) {
         case "bargraph":
             return <Bargraph data={props.data}  height={props.height} width={props.width}></Bargraph>;
-            break;
-        
-        case "histogram":
-            return <Histogram data={props.data}  height={props.height} width={props.width}></Histogram>;
             break;
         
         case "linegraph":
