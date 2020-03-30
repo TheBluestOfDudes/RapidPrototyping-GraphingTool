@@ -53,25 +53,34 @@ class Bargraph extends Component {
     updateChart(evt){
         let newVal = parseInt(evt.target.value);
         let target = parseInt(evt.target.name);
-        this.props.data[0][target] = newVal;
         let ctx = this.myCanvas.getContext("2d");
+        let data = this.props.data;
+        let obj = {value: data[0][target]};
         ctx.clearRect(0, 0, this.myCanvas.width, this.myCanvas.height);
-        let chart = new Chart(ctx, {
-            type: "bar",
-            data: {
-                labels: this.props.data[1],
-                datasets: [{
-                    label: 'My First dataset',
-                    backgroundColor: 'rgb(255, 99, 132)',
-                    borderColor: 'rgb(255, 99, 132)',
-                    data: this.props.data[0]
-                }]
-            },
-            options: {
-                responsive: false,
-                maintainAspectRatio: false,
+        gsap.to(obj, {
+            duration: 2,
+            value: newVal,
+            onUpdate: function(){
+                data[0][target] = obj.value;
+                let chart = new Chart(ctx, {
+                    type: "bar",
+                    data: {
+                        labels: data[1],
+                        datasets: [{
+                            label: 'My First dataset',
+                            backgroundColor: 'rgb(255, 99, 132)',
+                            borderColor: 'rgb(255, 99, 132)',
+                            data: data[0]
+                        }]
+                    },
+                    options: {
+                        responsive: false,
+                        maintainAspectRatio: false,
+                    }
+                });
+                chart.update(0);
             }
-        });
+        })
     }
 }
 
