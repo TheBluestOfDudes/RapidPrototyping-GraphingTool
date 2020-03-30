@@ -31,6 +31,7 @@ class Bargraph extends Component {
                 maintainAspectRatio: false,
             }
         });
+
         gsap.from(this.container, {
             duration: 2,
             scale: 0.000000001,

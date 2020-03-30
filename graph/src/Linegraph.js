@@ -9,9 +9,7 @@ class Linegraph extends Component {
 
         this.myCanvas = null;
 
-        this.tween = null;
-
-        this.tl = gsap.timeline({onStart: onStart, repeat: 0, repeatDelay: 1});
+        this.tl = gsap.timeline({repeat: 0, repeatDelay: 1});
 
     }
 

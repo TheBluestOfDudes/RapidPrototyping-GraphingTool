@@ -3,6 +3,8 @@ import gsap from "gsap";
 import styles from "./piechart.module.css";
 
 let array = [];
+let tl = gsap.timeline({repeat: 0, repeatDelay: 1});
+let tl2 = gsap.timeline({repeat: 0, repeatDelay: 1});
 
 class Piechart extends Component {
 
@@ -137,13 +139,25 @@ function addLabels(labels){
         box.appendChild(colorBox);
         box.appendChild(boxLabel);
         labels.appendChild(box);
+
+        tl2.from(box, {
+            duration: 1,
+            scale: 0.1,
+            y: -800,
+            ease: "power1.inOut",
+            stagger: {
+              grid: "auto",
+              from: "center",
+              amount: 1,
+            }
+          });
     }
 }
 
 function addControllers(th){
     let control = null;
     let input = null;
-    gsap.from(th.controllers, {
+    tl.from(th.controllers, {
         duration: 2,
         opacity: 0,
         delay: 0.2,
@@ -163,5 +177,20 @@ function addControllers(th){
         control.appendChild(input);
         th.controllers.appendChild(control);
     }
+
+    th.controllers.childNodes.forEach(function(value, index){
+
+        tl.from(value, {
+            duration: 1,
+            scale: 0.1,
+            y: -800,
+            ease: "power1.inOut",
+            stagger: {
+              grid: "auto",
+              from: "center",
+              amount: 0.5
+            }
+          });
+    })
 }
 export default Piechart;
