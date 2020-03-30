@@ -4,27 +4,44 @@ import gsap from "gsap";
 class Piechart extends Component {
 
     componentDidMount() {
-        const canvas = this.refs.canvas
-        const ctx = canvas.getContext("2d")
+        const canvas = this.refs.canvas;
+        const ctx = canvas.getContext("2d");
 
-        let objPie = {
-            values: [
-                {name: "Value 1", value: 10, color: "green"},
-                {name: "Value 2", value: 7, color: "red"},
-                {name: "Value 3", value: 5, color: "blue"},
-                {name: "Value 4", value: 25, color: "grey"},
-                {name: "Value 5", value: 10, color: "orange"},
-                {name: "Value 6", value: 15, color: "brown"}
-            ]
+        let values = [];
+        let name = [];
+        let color =["green", "red", "blue", "grey", "orange", "brown", "lightblue", "aqua", "beige", "blueviolet", "burleywood", "cyan"];
+
+        for(let i = 0; i < this.props.data[0].length; i++) {
+            values[i] = this.props.data[0][i];
         }
 
-        makePie(objPie.values, ctx, canvas);
-        gsap.to(objPie.values[2], {
+        for(let i = 0; i < this.props.data[1].length; i++) {
+            name[i] = this.props.data[1][i];
+        }
+
+        let array = [];
+        for(let i = 0; i < name.length; i++) {
+            let cakecolor = Math.floor(Math.random() * color.length);
+            let ok = false;
+            while (!ok) {
+                if(array.filter(e => e.color === color[cakecolor]).length > 0 && color.length >= array.length) {
+                    cakecolor = Math.floor(Math.random() * color.length);
+                } else {
+                    ok = true;
+                }
+            }
+
+            array.push({name: name[i], value: values[i], color: color[cakecolor]});
+        }
+
+
+        makePie(array, ctx, canvas);
+        gsap.to(array[2], {
             duration: 5,
             value: 20,
             onUpdate: function(){
-                console.log(objPie.values[2].value);
-                makePie(objPie.values, ctx, canvas)
+                console.log(array[2].value);
+                makePie(array, ctx, canvas)
             }
         })
       }
