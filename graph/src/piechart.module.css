@@ -1,0 +1,23 @@
+.labels{
+    display: grid;
+    grid-column: 2/3;
+    margin: 15px;
+}
+.colorBox{
+    grid: 1/2;
+}
+.containerBox{
+    display: grid;
+    grid-template-columns: 250px 100px;
+    grid-template-rows: 250px;
+}
+.canvas{
+    grid-column: 1/2;
+}
+.labelContainer{
+    display: grid;
+    grid-template-rows: auto, auto;
+}
+.controllers{
+    display: grid;
+}
